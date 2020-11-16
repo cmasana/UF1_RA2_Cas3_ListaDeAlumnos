@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+/**
+ * Volem implementar una llista per guardar els cognoms dels alumnes de classe.
+ * Hem de tenir un menú per poder provar les diverses operacions sobre la llista.
+ *
+ * @author Carlos Masana
+ */
 public class Main {
     public static void main(String[] args) {
         /*
@@ -8,9 +14,14 @@ public class Main {
         Scanner consola = new Scanner(System.in);
 
         /*
+        Número máximo de apellidos en la lista
+         */
+        final int MAX = 5;
+
+        /*
         Array con la lista de apellidos de los alumnos de clase
          */
-        String [] listaAlumnos;
+        String [] listaAlumnos = new String[MAX];
 
         /*
         Entero que almacena la posición de un determinado elemento que se encuentra en el array
@@ -32,8 +43,32 @@ public class Main {
          */
         do {
             /*
+            Menú principal con opciones
+             */
+            String [] menu = {
+                    "(1) Insertar un apellido en la lista",
+                    "(2) Localizar la posición de un apellido",
+                    "(3) Localizar un apellido",
+                    "(4) Eliminar un apellido",
+                    "(5) Eliminar todos los apellidos iguales",
+                    "(6) Vaciar la lista de apellidos",
+                    "(7) Mostrar primer/último apellido",
+                    "(8) Listar apellidos con su posición",
+                    "(9) Ordenar la lista de apellidos",
+                    "(0) Salir"
+            };
+
+            /*
+            Imprime las opciones del menú principal
+             */
+            for (int i = 0; i < menu.length; i++) {
+                System.out.println(menu[i]);
+            }
+
+            /*
             Opción seleccionada por el usuario
              */
+            System.out.println("Escoge una opción:");
             opcion = consola.nextInt();
 
             /*
@@ -59,8 +94,27 @@ public class Main {
                     System.out.println("Vaciar la lista");
                     break;
                 case 7: // Mostrar primero o último
-                    System.out.println("Escoge una opción: ");
                     do {
+                        /*
+                        Menú secundario para primer y último apellido en la lista
+                         */
+                        String [] menuPrimeroUltimo = {
+                                "(1) Muestra primer apellido de la lista",
+                                "(2) Muestra último apellido de la lista",
+                                "(3) Atrás"
+                        };
+
+                        /*
+                        Bucle que muestra las opciones del menú por pantalla
+                         */
+                        for (int i = 0; i < menuPrimeroUltimo.length; i++) {
+                            System.out.println(menuPrimeroUltimo[i]);
+                        }
+
+                        /*
+                        Muestra mensaje al usuario
+                         */
+                        System.out.println("Escoge una opción: ");
                         opcion = consola.nextInt();
 
                         switch (opcion) {
@@ -71,10 +125,11 @@ public class Main {
                                 System.out.println("Muestra último apellido de la lista");
                                 break;
                             case 3: // Salir
-                                System.out.println("Salir");
+                                System.out.println("Atrás");
                                 break;
                             default: // Opción incorrecta
                                 System.out.println("Opción incorrecta");
+                                opcion = consola.nextInt();
                                 break;
                         }
                     }
@@ -84,9 +139,31 @@ public class Main {
                     System.out.println("Listar apellidos con su posición");
                     break;
                 case 9: // Ordenar lexicográficamente
-                    System.out.println("Escoge una opción: ");
-                    // Después de mostrar la lista
+                    System.out.println("Ordenar lista");
+                    // TO-DO: Hay que mostrar lista ordenada
+
+                    // IMPLEMENTAR ENTER PARA CONTINUAR
                     do {
+                        /*
+                        Menú secundario para hacer gestiones en la lista ordenada
+                         */
+                        String [] menuOrdenar = {
+                                "(1) Busqueda en lista ordenada de apellidos",
+                                "(2) Eliminar apellidos desde lista ordenada",
+                                "(3) Atrás"
+                        };
+
+                        /*
+                        Bucle que muestra las opciones del menú
+                         */
+                        for (int i = 0; i < menuOrdenar.length; i++) {
+                            System.out.println(menuOrdenar[i]);
+                        }
+
+                        /*
+                        Mostrar mensaje al usuario para introducir una nueva opción
+                         */
+                        System.out.println("Escoge una opción: ");
                         opcion = consola.nextInt();
 
                         switch (opcion) {
@@ -97,10 +174,11 @@ public class Main {
                                 System.out.println("Eliminar apellidos desde lista ordenada");
                                 break;
                             case 3: // Salir
-                                System.out.println("Salir");
-                                System.exit(0);
+                                System.out.println("Atrás");
                                 break;
                             default: // Opción incorrecta
+                                System.out.println("Opción incorrecta");
+                                opcion = consola.nextInt();
                                 break;
                         }
                     }
