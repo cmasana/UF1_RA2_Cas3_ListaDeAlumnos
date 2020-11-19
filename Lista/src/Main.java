@@ -9,11 +9,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         /*
-        Scanner que permite introducir datos desde consola
-         */
-        Scanner consola = new Scanner(System.in);
-
-        /*
         Controla el nº de elementos que se encuentran dentro del array
         */
         int contadorElementos = 0;
@@ -28,15 +23,12 @@ public class Main {
          */
         String[] listaAlumnos = new String[MAX];
 
-        /*
-        Entero que almacena la posición de un determinado elemento que se encuentra en el array
-         */
-        int posicion;
-
-        /*
-        Cadena de caracteres que almacena el apellido de un dterminado alumno
-         */
-        String elemento;
+        listaAlumnos[0] = "masana";
+        listaAlumnos[1] = "martinez";
+        listaAlumnos[2] = "masana";
+        listaAlumnos[3] = "nieto";
+        listaAlumnos[4] = "masana";
+        contadorElementos = 5;
 
         /*
         Almacena la opción seleccionada en el menú
@@ -85,19 +77,19 @@ public class Main {
                     contadorElementos = insertar(listaAlumnos, contadorElementos);
                     break;
                 case 2: // Localizar posición
-                    contadorElementos = localizar(listaAlumnos, contadorElementos);
+                    localizar(listaAlumnos, contadorElementos);
                     break;
                 case 3: // localizar elemento
-                    System.out.println("Localizar un apellido");
+                    recuperar(listaAlumnos, contadorElementos);
                     break;
                 case 4: // Eliminar con posición
-                    System.out.println("Eliminar un apellido");
+                    contadorElementos = suprimir(listaAlumnos, contadorElementos, MAX);
                     break;
                 case 5: // Eliminar todos los elementos iguales
-                    System.out.println("Eliminar todos los apellidos iguales");
+                    contadorElementos = suprimirDato(listaAlumnos, contadorElementos, MAX);
                     break;
                 case 6: // Vaciar lista
-                    System.out.println("Vaciar la lista");
+                    contadorElementos = anular(listaAlumnos, contadorElementos);
                     break;
                 case 7: // Mostrar primero o último
                     do {
@@ -138,8 +130,8 @@ public class Main {
                     }
                     while (opcion != 3);
                     break;
-                case 8: // Listar todos los elemntos con su posición
-                    System.out.println("Listar apellidos con su posición");
+                case 8: // Listar todos los elementos con su posición
+                    imprimir(listaAlumnos);
                     break;
                 case 9: // Ordenar lexicográficamente
                     System.out.println("Ordenar lista");
@@ -252,7 +244,7 @@ public class Main {
         /*
         Mostramos array por pantalla
          */
-        printArrayNum(lista);
+        imprimir(lista);
 
         /*
         Devolvemos el valor de contadorElementos
@@ -265,9 +257,8 @@ public class Main {
      *
      * @param lista array de Strings con la lista de apellidos
      * @param contadorElementos entero que permite contabilizar el nº de elementos introducidos en el array
-     * @return devuelve el valor actualizado de contadorElementos
      */
-    public static int localizar(String[] lista, int contadorElementos) {
+    public static void localizar(String[] lista, int contadorElementos) {
         boolean status = false;
         String elemento;
         int posicion;
@@ -287,23 +278,172 @@ public class Main {
         if (!status) {
             printText("No se han encontrado coincidencias!!");
         }
-        return contadorElementos;
     }
 
     /**
-     * Imprime cada elemento de un array (formato con números)
-     * @param array array de Strings
+     * Muestra el elemento que se encuentra en la posición introducida por el usuario
+     * @param lista array de Strings con la lista de apellidos
+     * @param contadorElementos entero que permite contabilizar el nº de elementos introducidos en el array
      */
-    public static void printArrayNum(String[] array) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != null) {
-                System.out.println(i + ". " + array[i]);
+    public static void recuperar(String[] lista, int contadorElementos) {
+        /*
+        Almacena un estado: TRUE si encuentra un elemento y FALSE si no lo encuentra
+         */
+        boolean status = false;
+        String elemento;
+        int posicion;
+
+        printText("Introduce una posición para buscar");
+        posicion = enterInt();
+
+        /*
+        Recorre el índice del array, si la posición y el índice concuerdan se asigna a elemento el valor correspondiente
+        del array, se muestra un mensaje con el resultado y a status le asignamos el valor TRUE para que no muestre el
+        mensaje de alerta
+         */
+        for (int i = 0; i < contadorElementos; i++) {
+            if (i == posicion) {
+                elemento = lista[i];
+                printText("El elemnto de la posición " + posicion + " es " + elemento);
+                status = true;
             }
+        }
+
+        /*
+        Si no encuentra un determinado elemento se muestra un mensaje por pantalla
+        avisando de que no se han encontrado coincidencias
+         */
+        if (!status) {
+            printText("No se han encontrado coincidencias!!");
         }
     }
 
     /**
-     * Imprime cada elemento de un array (formato sin números)
+     * Elimina de la lista de alumnos el elemento de la posición introducida por el usuario
+     *
+     * @param lista array con la lista de elementos
+     * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
+     * @param longitudArray máximo de elementos que puede contener el array
+     * @return devuelve el contador de elementos con su nuevo valor
+     */
+    public static int suprimir(String[] lista, int contadorElementos, int longitudArray) {
+        int posicion;
+
+        printText("Introduce una posición a eliminar");
+        posicion = enterInt();
+
+        /*
+        Cuando se trabaja con arrays no se pueden eliminar valores, para simularlo
+        lo que hacemos es mover hacia la izquierda todos los valores posteriores a la posición
+        que queremos eliminar y el último valor como aparecerá duplicado le asignamos un NULL
+
+        Inicializamos 'i' con el valor de la 'posicion' para que los valores anteriores no se vean afectados
+        La condición tiene que ser 'i' menor que la longitudArray - 1 porque sino al intentar
+        eliminar el último valor del array nos tira un ArrayBoundException ya que estaríamos intentando
+        asignar un valor de un índice que no existe
+        Incrementamos el valor de 'i' de 1 en 1 para ir recorriendo y asignando todos los valores posteriores
+        a la posicion indicada por el usuario
+         */
+        for (int i = posicion; i < (longitudArray - 1); i++) {
+            lista[i] = lista[i + 1];
+        }
+
+        /*
+        Como ahora el último valor estaría duplicado, lo que hacemos es reiniciarlo y asignarle el valor de NULL
+         */
+        lista[longitudArray - 1] = null;
+
+        /*
+        Para finalizar, restamos 1 al contador de elementos
+         */
+        contadorElementos--;
+
+        return contadorElementos;
+    }
+    
+    public static int suprimirDato(String[] lista, int contadorElementos, int longitudArray) {
+        String elemento;
+        int posicion;
+        
+        printText("Introduce un elemento a eliminar");
+        elemento = enterString();
+
+        /*
+        Necesitamos comprobar 1 a 1 todos los elementos que se encuentran dentro del array
+         */
+        for (int i = 0; i < contadorElementos; i++) {
+
+            /*
+            Si alguno de los elementos concuerda con el introducido por el usuario
+            Asignamos el índice a la posición para ubicarlo dentro del array
+             */
+            if (elemento.equals(lista[i])) {
+                posicion = i;
+
+                /*
+                Vamos reasignando los valores posteriores del array a la posición indicada
+                para simular la eliminación de cada uno de ellos
+                 */
+                for (int k = posicion; k < (longitudArray - 1); k++) {
+                    lista[k] = lista[k + 1];
+                }
+
+                /*
+                Eliminamos el último valor en cada iteración del bucle principal
+                 */
+                lista[longitudArray - 1] = null;
+
+                /*
+                Restamos 1 al contador de elementos en cada iteración del bucle principal
+                 */
+                contadorElementos--;
+            }
+        }
+
+        return contadorElementos;
+    }
+
+    /**
+     * Permite vaciar la lista de apellidos
+     *
+     * @param lista array con la lista de apellidos de alumnos
+     * @param contadorElementos permite contabilizar el nº de apellidos que se encuentran dentro del array
+     * @return devuelve el valor actualizado de contadorElementos
+     */
+    public static int anular(String[] lista, int contadorElementos) {
+        if (contadorElementos == 0) {
+            printText("Error: La lista ya se encuentra vacía");
+        } else {
+            for (int i = 0; i < contadorElementos; i++) {
+                lista[i] = null;
+                contadorElementos--;
+            }
+        }
+
+        return contadorElementos;
+    }
+
+    /**
+     * Imprime todos los elementos de la lista de alumnos con su correspondiente posición
+     * 
+     * @param lista array de Strings
+     */
+    public static void imprimir(String[] lista) {
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null) {
+                System.out.println(i + ". " + lista[i]);
+            }
+        }
+    }
+
+
+
+    /*
+    MÉTODOS INPUT/OUTPUT
+     */
+
+    /**
+     * Imprime cada elemento de un Menú (desde 1 en adelante)
      * @param array array de Strings
      */
     public static void printMenu(String[] array) {
@@ -314,8 +454,9 @@ public class Main {
         }
     }
 
+
     /**
-     * Muestra por pantalla un texto
+     * Muestra por pantalla un determinado mensaje
      *
      * @param mensaje texto que queremos mostrar por pantalla
      */
