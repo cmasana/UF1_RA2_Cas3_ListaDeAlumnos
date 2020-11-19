@@ -284,7 +284,7 @@ public class Main {
         avisando de que no se han encontrado coincidencias
          */
         if (!status) {
-            printText("Error: No se han encontrado coincidencias. \n");
+            printText("Error: La posición " + posicion + " no existe. \n");
         }
     }
 
@@ -306,6 +306,10 @@ public class Main {
             printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
         }
         else {
+            /*
+            Mostramos lista
+             */
+            imprimir(lista);
             printText("Introduce una posición a eliminar");
             posicion = enterInt();
 
@@ -354,6 +358,7 @@ public class Main {
             printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
         }
         else {
+            imprimir(lista);
             printText("Introduce un elemento a eliminar");
             elemento = enterString();
 
