@@ -29,7 +29,7 @@ public class Main {
         listaAlumnos[1] = "martinez";
         listaAlumnos[2] = "masana";
         listaAlumnos[3] = "nieto";
-        listaAlumnos[4] = "masana";
+        listaAlumnos[4] = "nieto";
         contadorElementos = 5;
         */
 
@@ -563,7 +563,6 @@ public class Main {
      */
     public static int suprimirDatoOrdenada(String[] lista, int contadorElementos, int longitudArray) {
         String elemento;
-        String diferente;
         String[] temporal = new String[longitudArray];
         int contador = 0;
 
@@ -578,12 +577,11 @@ public class Main {
              */
             for (int i = 0; i < contadorElementos; i++) {
                 /*
-                Si el elemento es distinto al introducido, asignamos su valor a la primera posición de un array temporal
+                Si el elemento es distinto al introducido, asignamos el elemento a un array temporal
                 e incrementamos en 1 la variable contador para ir almacenando los posibles valores en orden
                  */
                 if (!elemento.equals(lista[i])) {
-                    diferente = lista[i];
-                    temporal[contador] = diferente;
+                    temporal[contador] = lista[i];
                     contador++;
                 }
             }
