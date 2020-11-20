@@ -9,11 +9,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         /*
-        Controla el nº de elementos que se encuentran dentro del array
-        */
-        int contadorElementos = 0;
-
-        /*
         Número máximo de apellidos en la lista
          */
         final int MAX = 5;
@@ -23,12 +18,20 @@ public class Main {
          */
         String[] listaAlumnos = new String[MAX];
 
+        /*
+        Controla el nº de elementos que se encuentran dentro del array
+        */
+        int contadorElementos = 0;
+
+        /*
+        // PRUEBAS
         listaAlumnos[0] = "masana";
         listaAlumnos[1] = "martinez";
         listaAlumnos[2] = "masana";
         listaAlumnos[3] = "nieto";
         listaAlumnos[4] = "masana";
         contadorElementos = 5;
+        */
 
         /*
         Almacena la opción seleccionada en el menú Principal
@@ -36,9 +39,14 @@ public class Main {
         int opcion;
 
         /*
-        Bucle que ejecuta una serie de sentencias mientras se cumple una determinada condición
+        Variable que permite salir de la aplicación
          */
-        do {
+        boolean exit = false;
+
+        /*
+        Permite ejecutar todas las sentencias mientras el valor de exit sea FALSE
+         */
+        while (!exit) {
             /*
             Muestra menú Principal y asigna la opción seleccionada
              */
@@ -70,58 +78,32 @@ public class Main {
                     contadorElementos = anular(listaAlumnos, contadorElementos);
                     break;
                 case 7: // Mostrar primero o último
-                    primeroUltimo(listaAlumnos,contadorElementos);
+                    primeroUltimo(listaAlumnos, contadorElementos);
                     break;
                 case 8: // Listar todos los elementos con su posición
-                    imprimir(listaAlumnos);
+                    imprimir(listaAlumnos, contadorElementos);
                     break;
                 case 9: // Ordenar lexicográficamente
-                    System.out.println("Ordenar lista");
-                    // TO-DO: Hay que mostrar lista ordenada
-
-                    // IMPLEMENTAR ENTER PARA CONTINUAR
-                    do {
-                        /*
-                        Muestra menú Ordenar y asigna la opción seleccionada
-                         */
-                        opcion = menuOrdenar();
-
-                        switch (opcion) {
-                            case 1: // Localizar en lista ordenada
-                                System.out.println("Busqueda en lista ordenada de apellidos");
-                                break;
-                            case 2: // Eliminar desde lista ordenada
-                                System.out.println("Eliminar apellidos desde lista ordenada");
-                                break;
-                            case 3: // Salir
-                                System.out.println("Atrás");
-                                break;
-                            default: // Opción incorrecta
-                                System.out.println("Opción incorrecta");
-                                opcion = enterInt();
-                                break;
-                        }
-                    }
-                    while (opcion != 3);
+                    contadorElementos = ordenar(listaAlumnos, contadorElementos, MAX);
                     break;
-                case 10: // Salir
-                    printText("Saliendo...");
-                    System.exit(0);
+                case 10:
+                    /*
+                    Rompe la ejecución del bucle para salir de la aplicación
+                     */
+                    exit = true;
                     break;
                 default: // opción incorrecta
                     printText("Opción incorrecta!!");
                     break;
             }
         }
-
-        while (opcion != 10);
     }
 
 
     /**
      * Permite introducir un elemento en una determinada posición, ambos introducidos por el usuario
      *
-     * @param lista array de Strings
+     * @param lista             array de Strings
      * @param contadorElementos entero que permite contabilizar el nº de elementos introducidos en el array
      * @return devuelve el valor actualizado de contadorElementos
      */
@@ -197,7 +179,7 @@ public class Main {
                 /*
                 Mostramos array por pantalla
                  */
-                imprimir(lista);
+                imprimir(lista, contadorElementos);
             }
         }
 
@@ -210,7 +192,7 @@ public class Main {
     /**
      * Localiza la primera posición en la que se encuentra un determinado elemento introducido por el usuario
      *
-     * @param lista array de Strings con la lista de apellidos
+     * @param lista             array de Strings con la lista de apellidos
      * @param contadorElementos entero que permite contabilizar el nº de elementos introducidos en el array
      */
     public static void localizar(String[] lista, int contadorElementos) {
@@ -233,7 +215,7 @@ public class Main {
         Con break, rompemos la ejecución del bucle // PREGUNTAR
          */
         for (int i = 0; i < contadorElementos; i++) {
-            if (lista[i].equals(elemento)){
+            if (lista[i].equals(elemento)) {
                 posicion = i;
                 printText("La posición del apellido " + elemento + " es: " + posicion + " \n");
                 status = true;
@@ -252,7 +234,7 @@ public class Main {
     /**
      * Muestra el elemento que se encuentra en la posición introducida por el usuario
      *
-     * @param lista array de Strings con la lista de apellidos
+     * @param lista             array de Strings con la lista de apellidos
      * @param contadorElementos entero que permite contabilizar el nº de elementos introducidos en el array
      */
     public static void recuperar(String[] lista, int contadorElementos) {
@@ -291,9 +273,9 @@ public class Main {
     /**
      * Elimina de la lista de alumnos el elemento de la posición introducida por el usuario
      *
-     * @param lista array con la lista de elementos
+     * @param lista             array con la lista de elementos
      * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
-     * @param longitudArray máximo de elementos que puede contener el array
+     * @param longitudArray     máximo de elementos que puede contener el array
      * @return devuelve el contador de elementos con su nuevo valor
      */
     public static int suprimir(String[] lista, int contadorElementos, int longitudArray) {
@@ -304,12 +286,7 @@ public class Main {
          */
         if (contadorElementos == 0) {
             printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
-        }
-        else {
-            /*
-            Mostramos lista
-             */
-            imprimir(lista);
+        } else {
             printText("Introduce una posición a eliminar");
             posicion = enterInt();
 
@@ -345,9 +322,10 @@ public class Main {
 
     /**
      * Elimina de la lista todos los elementos que son iguales al indicado
-     * @param lista array con la lista de apellidos de alumnos
+     *
+     * @param lista             array con la lista de apellidos de alumnos
      * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
-     * @param longitudArray máximo de elementos que puede contener el array
+     * @param longitudArray     máximo de elementos que puede contener el array
      * @return devuelve el contador de elementos con su nuevo valor
      */
     public static int suprimirDato(String[] lista, int contadorElementos, int longitudArray) {
@@ -356,9 +334,7 @@ public class Main {
 
         if (contadorElementos == 0) {
             printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
-        }
-        else {
-            imprimir(lista);
+        } else {
             printText("Introduce un elemento a eliminar");
             elemento = enterString();
 
@@ -401,7 +377,7 @@ public class Main {
     /**
      * Permite vaciar la lista de apellidos
      *
-     * @param lista array con la lista de apellidos de alumnos
+     * @param lista             array con la lista de apellidos de alumnos
      * @param contadorElementos permite contabilizar el nº de apellidos que se encuentran dentro del array
      * @return devuelve el valor actualizado de contadorElementos
      */
@@ -425,58 +401,218 @@ public class Main {
     /**
      * Permite visualizar el primer o el último elemento de la lista de apellidos
      *
-     * @param lista array con la lista de apellidos de alumnos
+     * @param lista             array con la lista de apellidos de alumnos
      * @param contadorElementos permite contabilizar el nº de apellidos que se encuentran dentro del array
      */
     public static void primeroUltimo(String[] lista, int contadorElementos) {
         String elemento;
         int opcion;
+        boolean exit = false;
 
         /*
         Comprobación: Si el array no contiene ningún valor
          */
         if (contadorElementos == 0) {
             printText("Error: El array está vacío. \n");
-        }
-        else {
-            do {
+        } else {
+            while (!exit) {
             /*
             Muestra menú Primero/Último y asigna la opción seleccionada
             */
-            opcion = menuFirstLast();
+                opcion = menuFirstLast();
 
-            switch (opcion) {
-                case 1: // Muestra primer elemento
-                    elemento = lista[0];
-                    printText("El primer elemento es: " + elemento);
-                    break;
-                case 2: // Muestra último elemento
-                    elemento = lista[contadorElementos - 1];
-                    printText("El último elemento es: " + elemento);
-                    break;
-                default: // Opción incorrecta
-                    printText("Opción incorrecta");
-                    break;
+                switch (opcion) {
+                    case 1: // Muestra primer elemento
+                        elemento = lista[0];
+                        printText("El primer elemento es: 0. " + elemento);
+                        break;
+                    case 2: // Muestra último elemento
+                        elemento = lista[contadorElementos - 1];
+                        printText("El último elemento es: " + (contadorElementos - 1) + ". " + elemento);
+                        break;
+                    case 3:
+                        exit = true;
+                        break;
+                    default: // Opción incorrecta
+                        printText("Opción incorrecta");
+                        break;
                 }
             }
-            while (opcion != 3);
         }
     }
 
 
     /**
      * Imprime todos los elementos de la lista de alumnos con su correspondiente posición
-     * 
-     * @param lista array de Strings
+     *
+     * @param lista array de Strings con los apellidos de los alumnos
      */
-    public static void imprimir(String[] lista) {
-        for (int i = 0; i < lista.length; i++) {
-            if (lista[i] != null) {
-                printText(i + ". " + lista[i]);
-            }
+    public static void imprimir(String[] lista, int contadorElementos) {
+        for (int i = 0; i < contadorElementos; i++) {
+            printText(i + ". " + lista[i]);
         }
+        printText("\n");
     }
 
+    /**
+     * Permite ordenar lexicográficamente los elementos de la lista
+     *
+     * @param lista             array de Strings con los apellidos de los alumnos
+     * @param contadorElementos entero que permite contabilizar el nº de apellidos que se encuentran dentro del array
+     */
+    public static int ordenar(String[] lista, int contadorElementos, int longitudArray) {
+        /*
+        Almacena el valor del elemento menor cuando se comparan 2 elementos
+         */
+        String mayor;
+
+        /*
+        Cuando su valor cambia a TRUE permite salir del menú secundario
+         */
+        boolean exit = false;
+
+        /*
+        Almacena la opción seleccionada en el menú secundario de Ordenar
+         */
+        int opcion;
+
+        /*
+        Asignamos a 'i' el valor de 0 para que empiece a recorrer el array desde el primer valor, mientras el valor de
+        'i' sea menor que el nº de elementos dentro del array se ejecutará el bucle, de esta manera podremos comparar el
+        primer elemento con el resto.
+
+        En el segundo bucle, asignamos a 'k' el segundo valor del array. La condición del bucle es igual que el del
+        primero, de esta manera se van realizando todas las iteraciones hasta que ya no quedan más elementos en el array
+        por comparar.
+
+        Si la condición del 'if' es verdadera, quiere decir que el primer valor es mayor, por lo que lo asignamos a la
+        variable 'mayor' para así poder hacer uso de ella más tarde. Los valores intercambian su posición y así se van
+        comparando unos con otros. Es un poco rollo de explicar, lo documentaré con un dibujo para que sea más fácil de
+        entender.
+         */
+        for (int i = 0; i < contadorElementos; i++) {
+            for (int k = i + 1; k < contadorElementos; k++) {
+                /*
+                Al utilizar el metodo compareTo entre un string y otro da como resultado un nº entero
+                Si el resultado es mayor que 0: el primer string es mayor que el segundo
+                Si el resultado es 0: ambas cadenas son iguales
+                Si el resultado es menor que 0: el primer string es menor que el segundo
+                 */
+                if (lista[i].compareTo(lista[k]) > 0) {
+                    /*
+                    Asignamos el string más grande a la variable mayor
+                     */
+                    mayor = lista[i];
+
+                    /*
+                    El valor menor intercambia la posición con el mayor
+                     */
+                    lista[i] = lista[k];
+
+                    /*
+                    Asignamos a la siguiente posición el mayor, para ir ordenando (de menor a mayor)
+                     */
+                    lista[k] = mayor;
+                }
+            }
+        }
+
+        /*
+        Mostramos mensaje por pantalla
+         */
+        printText("La lista de alumnos ha sido ordenada exitosamente. \n");
+
+        /*
+        Muestra un menú secundario, después de que la lista de apellidos ha sido ordenada lexicográficamente
+         */
+        while (!exit) {
+            /*
+            Muestra menú Ordenar y asigna la opción seleccionada
+             */
+            opcion = menuOrdenar();
+
+            switch (opcion) {
+                case 1: // Localizar en lista ordenada
+                    localizar(lista, contadorElementos);
+                    break;
+                case 2: // Eliminar desde lista ordenada
+                    contadorElementos = suprimirDatoOrdenada(lista, contadorElementos, longitudArray);
+                    break;
+                case 3: // Mostrar lista ordenada
+                    imprimir(lista, contadorElementos);
+                    break;
+                case 4:
+                    exit = true;
+                    break;
+                default: // Opción incorrecta
+                    printText("Opción incorrecta");
+                    break;
+            }
+        }
+
+        return contadorElementos;
+    }
+
+    /**
+     * Elimina de la lista todos los elementos que son iguales al indicado
+     *
+     * @param lista             array con la lista de apellidos de alumnos
+     * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
+     * @param longitudArray     máximo de elementos que puede contener el array
+     * @return devuelve el contador de elementos con su nuevo valor
+     */
+    public static int suprimirDatoOrdenada(String[] lista, int contadorElementos, int longitudArray) {
+        String elemento;
+        String diferente;
+        String[] temporal = new String[longitudArray];
+        int contador = 0;
+
+        if (contadorElementos == 0) {
+            printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
+        } else {
+            printText("Introduce un elemento a eliminar");
+            elemento = enterString();
+
+            /*
+            Necesitamos comprobar 1 a 1 todos los elementos que se encuentran dentro del array
+             */
+            for (int i = 0; i < contadorElementos; i++) {
+                /*
+                Si el elemento es distinto al introducido, asignamos su valor a la primera posición de un array temporal
+                e incrementamos en 1 la variable contador para ir almacenando los posibles valores en orden
+                 */
+                if (!elemento.equals(lista[i])) {
+                    diferente = lista[i];
+                    temporal[contador] = diferente;
+                    contador++;
+                }
+            }
+        }
+
+        /*
+        Reiniciamos el último valor del array
+         */
+        lista[longitudArray - 1] = null;
+
+        /*
+        Asignamos un nuevo valor a contadorElementos, utilizando la variable contador tenemos los elementos exactos
+         */
+        contadorElementos = contador;
+
+        /*
+        Asignamos a cada posición del array original los valores del temporal
+         */
+        for (int i = 0; i < (longitudArray - 1); i++) {
+            lista[i] = temporal[i];
+        }
+
+        imprimir(lista, contadorElementos);
+
+        /*
+        Devolvemos el contador de elementos actualizado
+         */
+        return contadorElementos;
+}
 
 
     /*
@@ -603,7 +739,7 @@ public class Main {
         /*
         Menú secundario para primer y último apellido en la lista
         */
-        String [] menuPrimeroUltimo = {
+        String[] menuPrimeroUltimo = {
                 "Muestra primer apellido de la lista",
                 "Muestra último apellido de la lista",
                 "Atrás"
@@ -633,9 +769,10 @@ public class Main {
         /*
         Menú secundario para hacer gestiones en la lista ordenada
          */
-        String [] menuOrdenar = {
+        String[] menuOrdenar = {
                 "Busqueda en lista ordenada de apellidos",
                 "Eliminar apellidos desde lista ordenada",
+                "Muestra la lista ordenada de apellidos",
                 "Atrás"
         };
 
