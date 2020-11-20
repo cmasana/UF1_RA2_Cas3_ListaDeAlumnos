@@ -60,7 +60,7 @@ public class Main {
                     /*
                     Asignamos un nuevo valor a contadorElementos para poder utilizarlo durante la ejecución del programa
                      */
-                    contadorElementos = insertar(listaAlumnos, contadorElementos);
+                    contadorElementos = insertar(listaAlumnos, contadorElementos, MAX);
                     break;
                 case 2: // Localizar posición
                     localizar(listaAlumnos, contadorElementos);
@@ -105,9 +105,10 @@ public class Main {
      *
      * @param lista             array de Strings
      * @param contadorElementos entero que permite contabilizar el nº de elementos introducidos en el array
+     * @param longitudArray entero que almacena la longitud máxima del array listaAlumnos
      * @return devuelve el valor actualizado de contadorElementos
      */
-    public static int insertar(String[] lista, int contadorElementos) {
+    public static int insertar(String[] lista, int contadorElementos, int longitudArray) {
         /*
         Almacena un apellido
          */
@@ -121,7 +122,7 @@ public class Main {
         /*
         Comprobación: Si la lista de alumnos está llena
          */
-        if (contadorElementos == lista.length) {
+        if (contadorElementos == longitudArray) {
             printText("Error: La lista de apellidos está llena. \n");
         }
         /*
@@ -620,12 +621,12 @@ public class Main {
     /**
      * Imprime cada elemento de un Menú y añade un número (desde 1 en adelante)
      *
-     * @param array array de Strings
+     * @param menu array de Strings con los textos de cada menú
      */
-    public static void printMenu(String[] array) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != null) {
-                System.out.println((i + 1) + ". " + array[i]);
+    public static void printMenu(String[] menu) {
+        for (int i = 0; i < menu.length; i++) {
+            if (menu[i] != null) {
+                System.out.println((i + 1) + ". " + menu[i]);
             }
         }
     }
