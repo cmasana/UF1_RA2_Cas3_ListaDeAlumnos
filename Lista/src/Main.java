@@ -29,7 +29,7 @@ public class Main {
         listaAlumnos[1] = "martinez";
         listaAlumnos[2] = "masana";
         listaAlumnos[3] = "nieto";
-        listaAlumnos[4] = "nieto";
+        listaAlumnos[4] = "masana";
         contadorElementos = 5;
         */
 
@@ -88,11 +88,11 @@ public class Main {
                     break;
                 case 10:
                     /*
-                    Rompe la ejecución del bucle para salir de la aplicación
+                    Cambiamos el valor a TRUE para Romper la ejecución del bucle y así salir de la aplicación
                      */
                     exit = true;
                     break;
-                default: // opción incorrecta
+                default: // Opción incorrecta
                     printText("Opción incorrecta!!");
                     break;
             }
@@ -131,24 +131,14 @@ public class Main {
         else {
 
             /*
-            Mostramos mensaje
+            Mostramos mensaje y Asignamos el valor a la variable elemento
              */
-            printText("Introduce un apellido");
+            elemento = enterString("Introduce un apellido");
 
             /*
-            Asignamos el valor a la variable elemento
+            Mostramos mensaje y Asignamos el valor a la variable posicion
              */
-            elemento = enterString();
-
-            /*
-            Mostramos mensaje
-             */
-            printText("Introduce una posición");
-
-            /*
-            Asignamos el valor a la variable posicion
-             */
-            posicion = enterInt();
+            posicion = enterInt("Introduce una posición");
 
             /*
             Comprobación: Si en la posición introducida ya existe un valor almacenado
@@ -204,31 +194,39 @@ public class Main {
         String elemento;
         int posicion;
 
-        printText("Introduce un apellido para buscar");
-        elemento = enterString();
-
         /*
-        Recorremos el array, con contadorElementos tenemos el nº de elementos que han sido introducidos
-        Si uno de los valores concuerda con el valor que hemos introducido previamente, asignamos valor de 'i' a
-        posición, mostramos mensaje con resultado y asignamos a status el valor de TRUE para saltar la última
-        comprobación.
-
-        Con break, rompemos la ejecución del bucle // PREGUNTAR
+        Comprobación: Si la lista de apellidos está vacía
          */
-        for (int i = 0; i < contadorElementos; i++) {
-            if (lista[i].equals(elemento)) {
-                posicion = i;
-                printText("La posición del apellido " + elemento + " es: " + posicion + " \n");
-                status = true;
-                break; // Rompe la ejecución del bucle cuando encuentra el primer valor
-            }
+        if (listaVacia(contadorElementos)) {
+            printText("Error: No se puede buscar ningún elemento. La lista está vacía. \n");
         }
+        else {
+            elemento = enterString("Introduce un apellido para buscar");
 
-        /*
-        Si el elemento no se encuentra dentro del array se muestra un mensaje de error
-         */
-        if (!status) {
-            printText("Error: No se han encontrado coincidencias. \n");
+            /*
+            Recorremos el array, con contadorElementos tenemos el nº de elementos que han sido introducidos
+            Si uno de los valores concuerda con el valor que hemos introducido previamente, asignamos valor de 'i' a
+            posición, mostramos mensaje con resultado y asignamos a status el valor de TRUE para saltar la última
+            comprobación.
+
+            Con break, rompemos la ejecución del bucle, para mostrar únicamente la posición del primer elemento
+            encontrado.
+             */
+            for (int i = 0; i < contadorElementos; i++) {
+                if (lista[i].equals(elemento)) {
+                    posicion = i;
+                    printText("La posición del apellido " + elemento + " es: " + posicion + " \n");
+                    status = true;
+                    break; // Rompe ejecución
+                }
+            }
+
+            /*
+            Si el elemento no se encuentra dentro del array se muestra un mensaje de error
+             */
+            if (!status) {
+                printText("Error: No se han encontrado coincidencias. \n");
+            }
         }
     }
 
@@ -246,28 +244,35 @@ public class Main {
         String elemento;
         int posicion;
 
-        printText("Introduce una posición para buscar");
-        posicion = enterInt();
-
         /*
-        Recorre el índice del array, si la posición y el índice concuerdan se asigna a elemento el valor correspondiente
-        del array, se muestra un mensaje con el resultado y a status le asignamos el valor TRUE para que no muestre el
-        mensaje de alerta
+        Comprobación: Si la lista de apellidos está vacía
          */
-        for (int i = 0; i < contadorElementos; i++) {
-            if (i == posicion) {
-                elemento = lista[i];
-                printText("El elemento de la posición " + posicion + " es " + elemento + " \n");
-                status = true;
-            }
+        if (listaVacia(contadorElementos)) {
+            printText("Error: No se puede buscar ningún elemento. La lista está vacía. \n");
         }
+        else {
+            posicion = enterInt("Introduce una posición para buscar");
 
-        /*
-        Si no encuentra un determinado elemento se muestra un mensaje por pantalla
-        avisando de que no se han encontrado coincidencias
-         */
-        if (!status) {
-            printText("Error: La posición " + posicion + " no existe. \n");
+            /*
+            Recorre el índice del array, si la posición y el índice concuerdan se asigna a elemento el valor
+            correspondiente del array, se muestra un mensaje con el resultado y a status le asignamos el valor TRUE para
+            que no muestre el mensaje de alerta.
+             */
+            for (int i = 0; i < contadorElementos; i++) {
+                if (i == posicion) {
+                    elemento = lista[i];
+                    printText("El elemento de la posición " + posicion + " es " + elemento + " \n");
+                    status = true;
+                }
+            }
+
+            /*
+            Si no encuentra un determinado elemento se muestra un mensaje por pantalla avisando de que no se han
+            encontrado coincidencias.
+             */
+            if (!status) {
+                printText("Error: No se han econtrado coincidencias. \n");
+            }
         }
     }
 
@@ -285,37 +290,44 @@ public class Main {
         /*
         Comprobación: Si la lista de apellidos está vacía
          */
-        if (contadorElementos == 0) {
+        if (listaVacia(contadorElementos)) {
             printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
-        } else {
-            printText("Introduce una posición a eliminar");
-            posicion = enterInt();
+        }
+        else {
+            posicion = enterInt("Introduce una posición a eliminar");
 
             /*
-            Cuando se trabaja con arrays no se pueden eliminar valores, para simularlo
-            lo que hacemos es mover hacia la izquierda todos los valores posteriores a la posición
-            que queremos eliminar y el último valor como aparecerá duplicado le asignamos un NULL
-
-            Inicializamos 'i' con el valor de la 'posicion' para que los valores anteriores no se vean afectados
-            La condición tiene que ser 'i' menor que la longitudArray - 1 porque sino al intentar
-            eliminar el último valor del array nos tira un ArrayBoundException ya que estaríamos intentando
-            asignar un valor de un índice que no existe
-            Incrementamos el valor de 'i' de 1 en 1 para ir recorriendo y asignando todos los valores posteriores
-            a la posicion indicada por el usuario
+            Comprobación: Si la posición no existe dentro de la lista
              */
-            for (int i = posicion; i < (longitudArray - 1); i++) {
-                lista[i] = lista[i + 1];
+            if (!existePosicion(posicion, contadorElementos)) {
+                printText("Error: La posición indicada no existe dentro de la lista. \n");
+            } else {
+                /*
+                Cuando se trabaja con arrays no se pueden eliminar valores, para simularlo
+                lo que hacemos es mover hacia la izquierda todos los valores posteriores a la posición
+                que queremos eliminar y el último valor como aparecerá duplicado le asignamos un NULL
+
+                Inicializamos 'i' con el valor de la 'posicion' para que los valores anteriores no se vean afectados
+                La condición tiene que ser 'i' menor que la longitudArray - 1 porque sino al intentar
+                eliminar el último valor del array nos tira un ArrayBoundException ya que estaríamos intentando
+                asignar un valor de un índice que no existe
+                Incrementamos el valor de 'i' de 1 en 1 para ir recorriendo y asignando todos los valores posteriores
+                a la posicion indicada por el usuario
+                 */
+                for (int i = posicion; i < (longitudArray - 1); i++) {
+                    lista[i] = lista[i + 1];
+                }
+
+                /*
+                Como ahora el último valor estaría duplicado, lo que hacemos es reiniciarlo y asignarle el valor de NULL
+                 */
+                lista[longitudArray - 1] = null;
+
+                /*
+                Para finalizar, restamos 1 al contador de elementos
+                 */
+                contadorElementos--;
             }
-
-            /*
-            Como ahora el último valor estaría duplicado, lo que hacemos es reiniciarlo y asignarle el valor de NULL
-             */
-            lista[longitudArray - 1] = null;
-
-            /*
-            Para finalizar, restamos 1 al contador de elementos
-             */
-            contadorElementos--;
         }
 
         return contadorElementos;
@@ -333,41 +345,45 @@ public class Main {
         String elemento;
         int posicion;
 
-        if (contadorElementos == 0) {
+        if (listaVacia(contadorElementos)) {
             printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
         } else {
-            printText("Introduce un elemento a eliminar");
-            elemento = enterString();
+            elemento = enterString("Introduce un elemento a eliminar");
 
-            /*
-            Necesitamos comprobar 1 a 1 todos los elementos que se encuentran dentro del array
-             */
-            for (int i = 0; i < contadorElementos; i++) {
+            if (!existeElemento(lista, elemento, contadorElementos)) {
+                printText("Error: No existe ningún elemento con ese nombre. \n");
+            } else {
 
                 /*
-                Si alguno de los elementos concuerda con el introducido por el usuario
-                Asignamos el índice a la posición para ubicarlo dentro del array
+                Necesitamos comprobar 1 a 1 todos los elementos que se encuentran dentro del array
                  */
-                if (elemento.equals(lista[i])) {
-                    posicion = i;
+                for (int i = 0; i < contadorElementos; i++) {
 
                     /*
-                    Vamos reasignando los valores posteriores del array a la posición indicada
-                    para simular la eliminación de cada uno de ellos
+                    Si alguno de los elementos concuerda con el introducido por el usuario
+                    Asignamos el índice a la posición para ubicarlo dentro del array
                      */
-                    for (int k = posicion; k < (longitudArray - 1); k++) {
-                        lista[k] = lista[k + 1];
+                    if (elemento.equals(lista[i])) {
+                        posicion = i;
+
+                        /*
+                        Vamos reasignando los valores posteriores del array a la posición indicada
+                        para simular la eliminación de cada uno de ellos
+                         */
+                        for (int k = posicion; k < (longitudArray - 1); k++) {
+                            lista[k] = lista[k + 1];
+                        }
+
+                        /*
+                        Eliminamos el último valor en cada iteración del bucle principal
+                         */
+                        lista[longitudArray - 1] = null;
+
+                        /*
+                        Restamos 1 al contador de elementos en cada iteración del bucle principal
+                         */
+                        contadorElementos--;
                     }
-
-                    /*
-                    Eliminamos el último valor en cada iteración del bucle principal
-                     */
-                    lista[longitudArray - 1] = null;
-
-                    /*
-                    Restamos 1 al contador de elementos en cada iteración del bucle principal
-                     */
-                    contadorElementos--;
                 }
             }
         }
@@ -383,9 +399,10 @@ public class Main {
      * @return devuelve el valor actualizado de contadorElementos
      */
     public static int anular(String[] lista, int contadorElementos) {
-        if (contadorElementos == 0) {
+        if (listaVacia(contadorElementos)) {
             printText("Error: La lista ya se encuentra vacía. \n");
-        } else {
+        }
+        else {
             /*
             Recorremos cada una de las posiciones del array y vamos asignando el valor NULL a cada una de ellas
             Cada vez que se asigna el valor NULL hay que restar 1 al contador de Elementos
@@ -413,13 +430,13 @@ public class Main {
         /*
         Comprobación: Si el array no contiene ningún valor
          */
-        if (contadorElementos == 0) {
-            printText("Error: El array está vacío. \n");
+        if (listaVacia(contadorElementos)) {
+            printText("Error: No se puede mostrar ningún valor. La lista está vacía. \n");
         } else {
             while (!exit) {
-            /*
-            Muestra menú Primero/Último y asigna la opción seleccionada
-            */
+                /*
+                Muestra menú Primero/Último y asigna la opción seleccionada
+                */
                 opcion = menuFirstLast();
 
                 switch (opcion) {
@@ -431,7 +448,7 @@ public class Main {
                         elemento = lista[contadorElementos - 1];
                         printText("El último elemento es: " + (contadorElementos - 1) + ". " + elemento);
                         break;
-                    case 3:
+                    case 3: // Atrás
                         exit = true;
                         break;
                     default: // Opción incorrecta
@@ -447,12 +464,18 @@ public class Main {
      * Imprime todos los elementos de la lista de alumnos con su correspondiente posición
      *
      * @param lista array de Strings con los apellidos de los alumnos
+     * @param contadorElementos entero que permite contabilizar el nº de apellidos que se encuentran dentro del array
      */
     public static void imprimir(String[] lista, int contadorElementos) {
-        for (int i = 0; i < contadorElementos; i++) {
-            printText(i + ". " + lista[i]);
+        if (listaVacia(contadorElementos)) {
+            printText("Error: No se puede imprimir ningún valor. La lista de apellidos está vacía. \n");
         }
-        printText("\n");
+        else {
+            for (int i = 0; i < contadorElementos; i++) {
+                printText(i + ". " + lista[i]);
+            }
+            printText("\n");
+        }
     }
 
     /**
@@ -477,80 +500,84 @@ public class Main {
          */
         int opcion;
 
-        /*
-        Asignamos a 'i' el valor de 0 para que empiece a recorrer el array desde el primer valor, mientras el valor de
-        'i' sea menor que el nº de elementos dentro del array se ejecutará el bucle, de esta manera podremos comparar el
-        primer elemento con el resto.
+        if (listaVacia(contadorElementos)) {
+            printText("Error: No se puede ordenar una lista sin elementos. \n");
+        }
+        else {
+            /*
+            Asignamos a 'i' el valor de 0 para que empiece a recorrer el array desde el primer valor, mientras el valor
+            de 'i' sea menor que el nº de elementos dentro del array se ejecutará el bucle, de esta manera podremos
+            comparar el primer elemento con el resto.
 
-        En el segundo bucle, asignamos a 'k' el segundo valor del array. La condición del bucle es igual que el del
-        primero, de esta manera se van realizando todas las iteraciones hasta que ya no quedan más elementos en el array
-        por comparar.
+            En el segundo bucle, asignamos a 'k' el segundo valor del array. La condición del bucle es igual que el del
+            primero, de esta manera se van realizando todas las iteraciones hasta que ya no quedan más elementos en el
+            array por comparar.
 
-        Si la condición del 'if' es verdadera, quiere decir que el primer valor es mayor, por lo que lo asignamos a la
-        variable 'mayor' para así poder hacer uso de ella más tarde. Los valores intercambian su posición y así se van
-        comparando unos con otros. Es un poco rollo de explicar, lo documentaré con un dibujo para que sea más fácil de
-        entender.
-         */
-        for (int i = 0; i < contadorElementos; i++) {
-            for (int k = i + 1; k < contadorElementos; k++) {
+            Si la condición del 'if' es verdadera, quiere decir que el primer valor es mayor, por lo que lo asignamos a
+            la variable 'mayor' para así poder hacer uso de ella más tarde. Los valores intercambian su posición y así
+            se van comparando unos con otros. Es un poco rollo de explicar, lo documentaré con un dibujo para que sea
+            más fácil de entender.
+             */
+            for (int i = 0; i < contadorElementos; i++) {
+                for (int k = i + 1; k < contadorElementos; k++) {
+                    /*
+                    Al utilizar el metodo compareTo entre un string y otro da como resultado un nº entero
+                    Si el resultado es mayor que 0: el primer string es mayor que el segundo
+                    Si el resultado es 0: ambas cadenas son iguales
+                    Si el resultado es menor que 0: el primer string es menor que el segundo
+                     */
+                    if (lista[i].compareTo(lista[k]) > 0) {
+                        /*
+                        Asignamos el string más grande a la variable mayor
+                         */
+                        mayor = lista[i];
+
+                        /*
+                        El valor menor intercambia la posición con el mayor
+                         */
+                        lista[i] = lista[k];
+
+                        /*
+                        Asignamos a la siguiente posición el mayor, para ir ordenando (de menor a mayor)
+                         */
+                        lista[k] = mayor;
+                    }
+                }
+            }
+
+            /*
+            Mostramos mensaje por pantalla
+             */
+            printText("La lista de alumnos ha sido ordenada exitosamente. \n");
+
+            /*
+            Muestra un menú secundario, después de que la lista de apellidos ha sido ordenada lexicográficamente
+             */
+            while (!exit) {
                 /*
-                Al utilizar el metodo compareTo entre un string y otro da como resultado un nº entero
-                Si el resultado es mayor que 0: el primer string es mayor que el segundo
-                Si el resultado es 0: ambas cadenas son iguales
-                Si el resultado es menor que 0: el primer string es menor que el segundo
+                Muestra menú Ordenar y asigna la opción seleccionada
                  */
-                if (lista[i].compareTo(lista[k]) > 0) {
-                    /*
-                    Asignamos el string más grande a la variable mayor
-                     */
-                    mayor = lista[i];
+                opcion = menuOrdenar();
 
-                    /*
-                    El valor menor intercambia la posición con el mayor
-                     */
-                    lista[i] = lista[k];
-
-                    /*
-                    Asignamos a la siguiente posición el mayor, para ir ordenando (de menor a mayor)
-                     */
-                    lista[k] = mayor;
+                switch (opcion) {
+                    case 1: // Localizar en lista ordenada
+                        localizar(lista, contadorElementos);
+                        break;
+                    case 2: // Eliminar desde lista ordenada
+                        contadorElementos = suprimirDatoOrdenada(lista, contadorElementos, longitudArray);
+                        break;
+                    case 3: // Mostrar lista ordenada
+                        imprimir(lista, contadorElementos);
+                        break;
+                    case 4:
+                        exit = true;
+                        break;
+                    default: // Opción incorrecta
+                        printText("Opción incorrecta");
+                        break;
                 }
             }
         }
-
-        /*
-        Mostramos mensaje por pantalla
-         */
-        printText("La lista de alumnos ha sido ordenada exitosamente. \n");
-
-        /*
-        Muestra un menú secundario, después de que la lista de apellidos ha sido ordenada lexicográficamente
-         */
-        while (!exit) {
-            /*
-            Muestra menú Ordenar y asigna la opción seleccionada
-             */
-            opcion = menuOrdenar();
-
-            switch (opcion) {
-                case 1: // Localizar en lista ordenada
-                    localizar(lista, contadorElementos);
-                    break;
-                case 2: // Eliminar desde lista ordenada
-                    contadorElementos = suprimirDatoOrdenada(lista, contadorElementos, longitudArray);
-                    break;
-                case 3: // Mostrar lista ordenada
-                    imprimir(lista, contadorElementos);
-                    break;
-                case 4:
-                    exit = true;
-                    break;
-                default: // Opción incorrecta
-                    printText("Opción incorrecta");
-                    break;
-            }
-        }
-
         return contadorElementos;
     }
 
@@ -567,46 +594,50 @@ public class Main {
         String[] temporal = new String[longitudArray];
         int contador = 0;
 
-        if (contadorElementos == 0) {
-            printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
+        if (listaVacia(contadorElementos)) {
+            printText("Error: No se puede suprimir ningún elemento. La lista está vacía. \n");
         } else {
-            printText("Introduce un elemento a eliminar");
-            elemento = enterString();
+            elemento = enterString("Introduce un elemento a eliminar");
 
-            /*
-            Necesitamos comprobar 1 a 1 todos los elementos que se encuentran dentro del array
-             */
-            for (int i = 0; i < contadorElementos; i++) {
+            if (!existeElemento(lista, elemento, contadorElementos)) {
+                printText("Error: No existe ningún elemento con ese nombre. \n");
+            } else {
+
                 /*
-                Si el elemento es distinto al introducido, asignamos el elemento a un array temporal
-                e incrementamos en 1 la variable contador para ir almacenando los posibles valores en orden
+                Necesitamos comprobar 1 a 1 todos los elementos que se encuentran dentro del array
                  */
-                if (!elemento.equals(lista[i])) {
-                    temporal[contador] = lista[i];
-                    contador++;
+                for (int i = 0; i < contadorElementos; i++) {
+                    /*
+                    Si el elemento es distinto al introducido, asignamos el elemento a un array temporal
+                    e incrementamos en 1 la variable contador para ir almacenando los posibles valores en orden
+                     */
+                    if (!elemento.equals(lista[i])) {
+                        temporal[contador] = lista[i];
+                        contador++;
+                    }
                 }
+
+                /*
+                Reiniciamos el último valor del array
+                 */
+                lista[longitudArray - 1] = null;
+
+                /*
+                Asignamos un nuevo valor a contadorElementos, utilizando la variable contador tenemos los elementos
+                exactos
+                 */
+                contadorElementos = contador;
+
+                /*
+                Asignamos a cada posición del array original los valores del temporal
+                 */
+                for (int i = 0; i < (longitudArray - 1); i++) {
+                    lista[i] = temporal[i];
+                }
+
+                imprimir(lista, contadorElementos);
             }
         }
-
-        /*
-        Reiniciamos el último valor del array
-         */
-        lista[longitudArray - 1] = null;
-
-        /*
-        Asignamos un nuevo valor a contadorElementos, utilizando la variable contador tenemos los elementos exactos
-         */
-        contadorElementos = contador;
-
-        /*
-        Asignamos a cada posición del array original los valores del temporal
-         */
-        for (int i = 0; i < (longitudArray - 1); i++) {
-            lista[i] = temporal[i];
-        }
-
-        imprimir(lista, contadorElementos);
-
         /*
         Devolvemos el contador de elementos actualizado
          */
@@ -646,10 +677,12 @@ public class Main {
      *
      * @return un numero entero
      */
-    public static int enterInt() {
+    public static int enterInt(String mensaje) {
         Scanner consola = new Scanner(System.in);
         String digito;
         int numero;
+
+        printText(mensaje);
 
         do {
             digito = consola.next();
@@ -665,9 +698,11 @@ public class Main {
      *
      * @return una cadena de caracteres
      */
-    public static String enterString() {
+    public static String enterString(String mensaje) {
         Scanner consola = new Scanner(System.in);
         String texto;
+
+        printText(mensaje);
 
         do {
             texto = consola.nextLine();
@@ -675,6 +710,67 @@ public class Main {
 
         return texto;
     }
+
+    /*
+    COMPROBACIONES
+     */
+
+    /**
+     * Permite saber si la lista contiene algún elemento o está vacía
+     *
+     * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
+     * @return devuelve TRUE si la lista está vacía y FALSE si contiene algún elemento
+     */
+    public static boolean listaVacia(int contadorElementos) {
+        boolean vacio;
+
+        /*
+        Asigna a variable vacío el resultado de la operación
+         */
+        vacio = (contadorElementos == 0);
+
+        return vacio;
+    }
+
+    /**
+     * Permite conocer si un elemento existe dentro de la lista
+     * @param lista array con la lista de apellidos de los alumnos
+     * @param busqueda elemento para realizar la busqueda
+     * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
+     * @return devuelve un valor boolean, si el elemento existe devuelve TRUE, si no existe devuelve FALSE
+     */
+    public static boolean existeElemento(String[] lista, String busqueda, int contadorElementos) {
+        boolean existe = false;
+
+        for (int i = 0; i < contadorElementos; i++) {
+            if (busqueda.equals(lista[i])) {
+                existe = true;
+                break;
+            }
+        }
+
+        return existe;
+    }
+
+    /**
+     * Permite conocer si una posición existe dentro de la lista
+     *
+     * @param posicion elemento para realizar la busqueda
+     * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
+     * @return devuelve un valor boolean, si el elemento existe devuelve TRUE, si no existe devuelve FALSE
+     */
+    public static boolean existePosicion(int posicion, int contadorElementos) {
+        boolean existe = false;
+        for (int i = 0; i < contadorElementos; i++) {
+            if (posicion == i) {
+                existe = true;
+                break;
+            }
+        }
+
+        return existe;
+    }
+
 
     /*
     MENUs DE LA APLICACIÓN
@@ -713,14 +809,9 @@ public class Main {
         printMenu(menu);
 
         /*
-        Muestra un mensaje indicándole al usuario que introduzca una opción
-         */
-        printText("Escoge una opción:");
-
-        /*
         Permite al usuario introducir una de las opciones disponibles
          */
-        opcion = enterInt();
+        opcion = enterInt("Escoge una opción;");
 
         /*
         Devuelve la opción seleccionada
@@ -750,10 +841,9 @@ public class Main {
         printMenu(menuPrimeroUltimo);
 
         /*
-        Muestra mensaje al usuario
+        Muestra mensaje al usuario y asigna la opcion seleccionada
          */
-        printText("Escoge una opción: ");
-        opcion = enterInt();
+        opcion = enterInt("Escoge una opción: ");
 
         return opcion;
     }
@@ -783,8 +873,7 @@ public class Main {
         /*
         Mostrar mensaje al usuario para introducir una nueva opción
          */
-        printText("Escoge una opción: ");
-        opcion = enterInt();
+        opcion = enterInt("Escoge una opción: ");
 
         return opcion;
     }
