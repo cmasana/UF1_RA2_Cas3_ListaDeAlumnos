@@ -24,14 +24,17 @@ public class Main {
         int contadorElementos = 0;
 
         /*
+
         // PRUEBAS
         listaAlumnos[0] = "masana";
-        listaAlumnos[1] = "martinez";
-        listaAlumnos[2] = "masana";
+        listaAlumnos[1] = "masana";
+        listaAlumnos[2] = "martinez";
         listaAlumnos[3] = "nieto";
         listaAlumnos[4] = "masana";
         contadorElementos = 5;
-        */
+
+         */
+
 
         /*
         Almacena la opción seleccionada en el menú Principal
@@ -383,6 +386,13 @@ public class Main {
                         Restamos 1 al contador de elementos en cada iteración del bucle principal
                          */
                         contadorElementos--;
+
+                        /*
+                        Restamos 1 a la variable de control del primer bucle. De esta manera se volverá a realizar la
+                        iteración sobre la posición introducida y evitaremos que si existen apellidos repetidos estos
+                        no se eliminen. (ESTO ES LO QUE FALTABA)
+                         */
+                        i--;
                     }
                 }
             }
@@ -564,7 +574,7 @@ public class Main {
                         localizar(lista, contadorElementos);
                         break;
                     case 2: // Eliminar desde lista ordenada
-                        contadorElementos = suprimirDatoOrdenada(lista, contadorElementos, longitudArray);
+                        contadorElementos = suprimirDato(lista, contadorElementos, longitudArray);
                         break;
                     case 3: // Mostrar lista ordenada
                         imprimir(lista, contadorElementos);
@@ -580,69 +590,6 @@ public class Main {
         }
         return contadorElementos;
     }
-
-    /**
-     * Elimina de la lista todos los elementos que son iguales al indicado
-     *
-     * @param lista             array con la lista de apellidos de alumnos
-     * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
-     * @param longitudArray     máximo de elementos que puede contener el array
-     * @return devuelve el contador de elementos con su nuevo valor
-     */
-    public static int suprimirDatoOrdenada(String[] lista, int contadorElementos, int longitudArray) {
-        String elemento;
-        String[] temporal = new String[longitudArray];
-        int contador = 0;
-
-        if (listaVacia(contadorElementos)) {
-            printText("Error: No se puede suprimir ningún elemento. La lista está vacía. \n");
-        } else {
-            elemento = enterString("Introduce un elemento a eliminar");
-
-            if (!existeElemento(lista, elemento, contadorElementos)) {
-                printText("Error: No existe ningún elemento con ese nombre. \n");
-            } else {
-
-                /*
-                Necesitamos comprobar 1 a 1 todos los elementos que se encuentran dentro del array
-                 */
-                for (int i = 0; i < contadorElementos; i++) {
-                    /*
-                    Si el elemento es distinto al introducido, asignamos el elemento a un array temporal
-                    e incrementamos en 1 la variable contador para ir almacenando los posibles valores en orden
-                     */
-                    if (!elemento.equals(lista[i])) {
-                        temporal[contador] = lista[i];
-                        contador++;
-                    }
-                }
-
-                /*
-                Reiniciamos el último valor del array
-                 */
-                lista[longitudArray - 1] = null;
-
-                /*
-                Asignamos un nuevo valor a contadorElementos, utilizando la variable contador tenemos los elementos
-                exactos
-                 */
-                contadorElementos = contador;
-
-                /*
-                Asignamos a cada posición del array original los valores del temporal
-                 */
-                for (int i = 0; i < (longitudArray - 1); i++) {
-                    lista[i] = temporal[i];
-                }
-
-                imprimir(lista, contadorElementos);
-            }
-        }
-        /*
-        Devolvemos el contador de elementos actualizado
-         */
-        return contadorElementos;
-}
 
 
     /*
