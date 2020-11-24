@@ -6,7 +6,7 @@
 
 
 
-Table of Contents
+Tabla de contenidos
 =================
 
 * [1. Enunciado](#1-enunciado)
