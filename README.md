@@ -23,8 +23,6 @@ Tabla de contenidos
    * [2.8.2 Ultimo](#282-ultimo)
    * [2.9 Imprimir](#29-imprimir)
    * [2.10 Ordenar](#210-ordenar)
-   * [2.10.1 LocalizarEnOrdenada](#2101-localizarenordenada)
-   * [2.10.2 SuprimirDatoOrdenada](#2102-suprimirdatoordenada)
 * [3. Funciones de Entrada/Salida de datos (I/O)](#3-funciones-de-entradasalida-de-datos-io)
    * [3.1 PrintMenu](#31-printmenu)
    * [3.2 PrintText](#32-printtext)
@@ -300,11 +298,7 @@ Cuando se realizan todas las iteraciones del segundo bucle. El primer bucle se i
 
 
 
-- ### 2.10.1 LocalizarEnOrdenada
-
-  Al utilizar funciones en nuestra aplicación, hemos reaprovechado el código y esta operación se realiza con la operación que ya teníamos programada anteriormente. Así que únicamente tenemos que hacer referencia a ella. Dicha función es Localizar.
-
-- ### 2.10.2 SuprimirDatoOrdenada
+**NOTA:** Al utilizar funciones en nuestra aplicación, hemos reaprovechado el código de ***localizar()*** y ***suprimirDato()*** y no tenemos que volver a programar ***LocalizarEnOrdenada()*** y ***SuprimirDatoEnOrdenada()*** ya que su funcionamiento es el mismo.
 
 
 
