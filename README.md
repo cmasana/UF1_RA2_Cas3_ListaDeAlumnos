@@ -5,7 +5,42 @@
 **Fecha: 23/11/2020**
 
 ------
-{:toc}
+
+
+Tabla de contenidos
+=================
+
+* [1. Descripción](#1-descripci\xC3\xB3n)
+* [2. Funcionalidades aplicación](#2-funcionalidades-aplicaci\xC3\xB3n)
+   * [2.1 Menú](#21-men\xC3\xBA)
+   * [2.2 Insertar](#22-insertar)
+   * [2.3 Localizar](#23-localizar)
+   * [2.4 Recuperar](#24-recuperar)
+   * [2.5 Suprimir](#25-suprimir)
+   * [2.6 SuprimirDato](#26-suprimirdato)
+   * [2.7 Anular](#27-anular)
+   * [2.8 PrimeroÚltimo](#28-primero\xC3\xBAltimo)
+   * [2.8.1 Primero](#281-primero)
+   * [2.8.2 Último](#282-\xC3\xBAltimo)
+   * [2.9 Imprimir](#29-imprimir)
+   * [2.10 Ordenar](#210-ordenar)
+   * [2.10.1 LocalizarEnOrdenada](#2101-localizarenordenada)
+   * [2.10.2 SuprimirDatoOrdenada](#2102-suprimirdatoordenada)
+* [3. Funcionalidades básicas de Entrada/Salida de datos (I/O)](#3-funcionalidades-b\xC3\xA1sicas-de-entradasalida-de-datos-io)
+   * [3.1 PrintMenu](#31-printmenu)
+   * [3.2 PrintText](#32-printtext)
+   * [3.3 EnterInt](#33-enterint)
+   * [3.4 EnterString](#34-enterstring)
+* [4. Funciones para realizar comprobaciones](#4-funciones-para-realizar-comprobaciones)
+   * [4.1 ListaVacía](#41-listavac\xC3\xADa)
+   * [4.2 ExisteElemento](#42-existeelemento)
+   * [4.3 ExistePosición](#43-existeposici\xC3\xB3n)
+* [5. Menús](#5-men\xC3\xBAs)
+   * [5.1 MenuPrincipal](#51-menuprincipal)
+   * [5.2 MenuFirstLast](#52-menufirstlast)
+   * [5.3 MenuOrdenar](#53-menuordenar)
+
+
 
 ## 1. Descripción
 
@@ -61,7 +96,7 @@ switch ( expresión ) {
 
 Esta operación permite introducir un elemento en una determinada posición, ambos introducidos por el usuario.
 
-![](1.png)
+![](images/1.png)
 
 Para llevar a cabo esta operación, necesitamos realizar varias comprobaciones:
 
@@ -95,7 +130,7 @@ Para llevar a cabo esta operación, necesitamos realizar varias comprobaciones:
 
 Esta operación permite localizar la primera posición en la que se encuentra un determinado elemento introducido por el usuario.
 
-![](2.png)
+![](images/2.png)
 
 Para llevar a cabo esta operación, necesitamos realizar las siguientes comprobaciones:
 
@@ -121,7 +156,7 @@ Para llevar a cabo esta operación, necesitamos realizar las siguientes comproba
 
 Esta operación permite encontrar el elemento que se encuentra en una determinada posición introducida por el usuario.
 
-![](3.png)
+![](images/3.png)
 
 Las comprobaciones, en este caso, son las mismas que se realizan en la operación Localizar.
 
@@ -131,15 +166,15 @@ Las comprobaciones, en este caso, son las mismas que se realizan en la operació
 
 Esta operación permite eliminar de la lista el elemento que se encuentra en una determinada posición introducida por el usuario.
 
-![](4.png)
+![](images/4.png)
 
 Cuando se trabaja con arrays no se pueden eliminar valores, para simularlo lo que hacemos es mover hacia la izquierda todos los valores posteriores a la posición que queremos eliminar.
 
-![](4_1.png)
+![](images/4_1.png)
 
 Como el último valor aparecerá duplicado le asignamos un NULL y de esta manera quedará vacío.
 
-![](4_2.png)
+![](images/4_2.png)
 
 Para llevar a cabo esta operación, necesitamos realizar las siguientes comprobaciones:
 
@@ -167,7 +202,7 @@ Para llevar a cabo esta operación, necesitamos realizar las siguientes comproba
 
 Esta operación permite vaciar la lista y eliminar así todos los elementos que contiene.
 
-![](6.png)
+![](images/6.png)
 
 Para llevar a cabo esta operación, necesitamos realizar una única comprobación:
 
@@ -189,19 +224,19 @@ Esta operación muestra un menú secundario dentro del switch con dos opciones p
 
   Muestra el primer elemento de la lista.
 
-  ![](7.png)
+  ![](images/7.png)
 
 - ### 2.8.2 Último
 
   Muestra el último elemento de la lista.
 
-  ![](7_2.png)
+  ![](images/7_2.png)
 
 ### 2.9 Imprimir
 
 Esta operación imprime todos los elementos de la lista desde el primero al último y mostrando su posición
 
-![](8.png)
+![](images/8.png)
 
 
 
@@ -219,7 +254,7 @@ if (listaVacia(contadorElementos)) {
 
 Esta operación ordena lexicográficamente los elementos de la lista.
 
-![](9.png)
+![](images/9.png)
 
 Como en operaciones anteriores, la única comprobación que realizamos es si la lista está vacía
 
@@ -260,7 +295,7 @@ for (int i = 0; i < contadorElementos; i++) {
 
 El primer bucle recoge el primer elemento, el segundo recoge el elemento posterior. El condicional los compara y si el resultado es mayor que cero se intercambian las posiciones y se realiza la siguiente iteración en el segundo bucle. De esta manera se va comparando siempre el elemento de la primera posición con el resto de elementos. 
 
-![](9_1.png)
+![](images/9_1.png)
 
 Cuando se realizan todas las iteraciones del segundo bucle. El primer bucle se incrementa en uno y se realiza nuevamente toda la comprobación a partir de la posición con índice 1. De esta manera se ordena todo el array lexicográficamente.
 
