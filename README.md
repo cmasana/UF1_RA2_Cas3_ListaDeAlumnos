@@ -5,8 +5,7 @@
 **Fecha: 23/11/2020**
 
 ------
-
-[TOC]
+{:toc}
 
 ## 1. Descripción
 
