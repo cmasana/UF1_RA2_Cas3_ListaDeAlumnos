@@ -1,48 +1,16 @@
 # UF1 RA2 Cas3 ListaDeAlumnos
 
-**Curso: ASIX1B**
-**Autor: Carlos Masana Martínez**
-**Fecha: 23/11/2020**
+**ASIX1B | Carlos Masana Martínez | 24/11/2020**
 
 ------
 
 
-Tabla de contenidos
-=================
-
-* [1. Descripción](#1-descripci\xC3\xB3n)
-* [2. Funcionalidades aplicación](#2-funcionalidades-aplicaci\xC3\xB3n)
-   * [2.1 Menú](#21-men\xC3\xBA)
-   * [2.2 Insertar](#22-insertar)
-   * [2.3 Localizar](#23-localizar)
-   * [2.4 Recuperar](#24-recuperar)
-   * [2.5 Suprimir](#25-suprimir)
-   * [2.6 SuprimirDato](#26-suprimirdato)
-   * [2.7 Anular](#27-anular)
-   * [2.8 PrimeroÚltimo](#28-primero\xC3\xBAltimo)
-   * [2.8.1 Primero](#281-primero)
-   * [2.8.2 Último](#282-\xC3\xBAltimo)
-   * [2.9 Imprimir](#29-imprimir)
-   * [2.10 Ordenar](#210-ordenar)
-   * [2.10.1 LocalizarEnOrdenada](#2101-localizarenordenada)
-   * [2.10.2 SuprimirDatoOrdenada](#2102-suprimirdatoordenada)
-* [3. Funcionalidades básicas de Entrada/Salida de datos (I/O)](#3-funcionalidades-b\xC3\xA1sicas-de-entradasalida-de-datos-io)
-   * [3.1 PrintMenu](#31-printmenu)
-   * [3.2 PrintText](#32-printtext)
-   * [3.3 EnterInt](#33-enterint)
-   * [3.4 EnterString](#34-enterstring)
-* [4. Funciones para realizar comprobaciones](#4-funciones-para-realizar-comprobaciones)
-   * [4.1 ListaVacía](#41-listavac\xC3\xADa)
-   * [4.2 ExisteElemento](#42-existeelemento)
-   * [4.3 ExistePosición](#43-existeposici\xC3\xB3n)
-* [5. Menús](#5-men\xC3\xBAs)
-   * [5.1 MenuPrincipal](#51-menuprincipal)
-   * [5.2 MenuFirstLast](#52-menufirstlast)
-   * [5.3 MenuOrdenar](#53-menuordenar)
 
 
 
-## 1. Descripción
+
+
+## 1. Enunciado
 
 Queremos implementar una lista para guardar los apellidos de los alumnos de clase. Tenemos que implementar la estructura de datos 'lista' en Java con arrays (no se puede utilizar la clase ArrayList). A mayores, necesitamos un menú para poder probar las diversas operaciones sobre la lista.
 
@@ -68,9 +36,9 @@ Si conseguimos programar la operación Ordenar, podemos mejorar la implementaci�
 
 
 
-## 2. Funcionalidades aplicación
+## 2. Funciones programa
 
-### 2.1 Menú
+### 2.1 Switch
 
 Para organizar cada una de las operaciones por separado he creado un menú mediante la sentencia **switch**. Esto proporciona una manera sencilla de estructurar nuestro código y probar las diferentes partes de nuestro código independientemente. Dependiendo del número introducido en nuestro terminal podremos ejecutar las diferentes partes del código individualmente.
 
@@ -216,7 +184,7 @@ Para llevar a cabo esta operación, necesitamos realizar una única comprobació
 
   
 
-### 2.8 PrimeroÚltimo
+### 2.8 PrimeroUltimo
 
 Esta operación muestra un menú secundario dentro del switch con dos opciones posibles. La única comprobación que realizamos es que la lista no se encuentre vacía. Si hay un único elemento dentro de la lista, este será tanto el primero como el último.
 
@@ -226,7 +194,7 @@ Esta operación muestra un menú secundario dentro del switch con dos opciones p
 
   ![](images/7.png)
 
-- ### 2.8.2 Último
+- ### 2.8.2 Ultimo
 
   Muestra el último elemento de la lista.
 
@@ -309,7 +277,7 @@ Cuando se realizan todas las iteraciones del segundo bucle. El primer bucle se i
 
 
 
-## 3. Funcionalidades básicas de Entrada/Salida de datos (I/O)
+## 3. Funciones de Entrada/Salida de datos (I/O)
 
 Para evitar repetir código en la aplicación he creado diferentes funciones que nos permiten gestionar las entradas y salidas de datos. Son las siguientes:
 
@@ -390,7 +358,7 @@ public static String enterString(String mensaje) {
 
 También para evitar repetir código ya que en muchas de las operaciones se realizaban las mismas comprobaciones, he creado estas tres funciones:
 
-### 4.1 ListaVacía
+### 4.1 ListaVacia
 
 Permite conocer si la lista contiene algún elemento o está vacía.
 
@@ -427,7 +395,7 @@ public static boolean existeElemento(String[] lista, String busqueda, int contad
 
 
 
-### 4.3 ExistePosición
+### 4.3 ExistePosicion
 
 Permite conocer si una determinada posición existe dentro de la lista.
 
@@ -447,7 +415,7 @@ public static boolean existePosicion(int posicion, int contadorElementos) {
 
 
 
-## 5. Menús
+## 5. Menu's
 
 Para finalizar, he creado también 3 funciones que permiten mostrar los menús y recoger la opción introducida por el usuario.
 
