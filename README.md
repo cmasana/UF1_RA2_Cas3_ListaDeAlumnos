@@ -6,7 +6,38 @@
 
 
 
+Table of Contents
+=================
 
+* [1. Enunciado](#1-enunciado)
+* [2. Funciones programa](#2-funciones-programa)
+   * [2.1 Switch](#21-switch)
+   * [2.2 Insertar](#22-insertar)
+   * [2.3 Localizar](#23-localizar)
+   * [2.4 Recuperar](#24-recuperar)
+   * [2.5 Suprimir](#25-suprimir)
+   * [2.6 SuprimirDato](#26-suprimirdato)
+   * [2.7 Anular](#27-anular)
+   * [2.8 PrimeroUltimo](#28-primeroultimo)
+   * [2.8.1 Primero](#281-primero)
+   * [2.8.2 Ultimo](#282-ultimo)
+   * [2.9 Imprimir](#29-imprimir)
+   * [2.10 Ordenar](#210-ordenar)
+   * [2.10.1 LocalizarEnOrdenada](#2101-localizarenordenada)
+   * [2.10.2 SuprimirDatoOrdenada](#2102-suprimirdatoordenada)
+* [3. Funciones de Entrada/Salida de datos (I/O)](#3-funciones-de-entradasalida-de-datos-io)
+   * [3.1 PrintMenu](#31-printmenu)
+   * [3.2 PrintText](#32-printtext)
+   * [3.3 EnterInt](#33-enterint)
+   * [3.4 EnterString](#34-enterstring)
+* [4. Funciones para realizar comprobaciones](#4-funciones-para-realizar-comprobaciones)
+   * [4.1 ListaVacia](#41-listavacia)
+   * [4.2 ExisteElemento](#42-existeelemento)
+   * [4.3 ExistePosicion](#43-existeposicion)
+* [5. Menu's](#5-menus)
+   * [5.1 MenuPrincipal](#51-menuprincipal)
+   * [5.2 MenuFirstLast](#52-menufirstlast)
+   * [5.3 MenuOrdenar](#53-menuordenar)
 
 
 
