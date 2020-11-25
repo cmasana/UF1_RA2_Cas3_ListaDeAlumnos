@@ -5,6 +5,8 @@ import java.util.Scanner;
  * Hem de tenir un menú per poder provar les diverses operacions sobre la llista.
  *
  * @author Carlos Masana
+ * @version 1.0
+ * @since 25-11-2020
  */
 public class Main {
     public static void main(String[] args) {
