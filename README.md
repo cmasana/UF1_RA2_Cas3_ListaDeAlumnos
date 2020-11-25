@@ -195,6 +195,32 @@ Para llevar a cabo esta operación, necesitamos realizar las siguientes comproba
 
 ### 2.6 SuprimirDato
 
+Esta operación permite eliminar de la lista cualquier ocurrencia de un elemento introducido por el usuario.
+
+![](images/12.png)
+
+Se realiza muy parecido a la operación anterior con una pequeña diferencia. En el momento que se mueven los elementos hacia la izquierda, hay que reiniciar el valor de la variable de control del primer bucle para que vuelva a iterar sobre todos los elementos de nuevo y comprobar así si todavía existen elementos iguales al introducido por el usuario.
+
+Las comprobaciones que hay que hacer, en este caso, son las mismas:
+
+- Si la lista de elementos no contiene ningún dato (está vacía)
+
+  ```java
+  if (listaVacia(contadorElementos)) {
+              printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
+  }
+  ```
+
+- Si el elemento introducido existe dentro de la lista
+
+  ```java
+  if (!existeElemento(lista, elemento, contadorElementos)) {
+              printText("Error: No existe ningún elemento con ese nombre. \n");
+  }
+  ```
+
+  
+
 ### 2.7 Anular
 
 Esta operación permite vaciar la lista y eliminar así todos los elementos que contiene.
