@@ -36,6 +36,7 @@ Tabla de contenidos
    * [5.1 MenuPrincipal](#51-menuprincipal)
    * [5.2 MenuFirstLast](#52-menufirstlast)
    * [5.3 MenuOrdenar](#53-menuordenar)
+* [6. Documentar con JavaDoc](#6-documentar-con-javadoc)
 
 
 
@@ -546,3 +547,25 @@ public static int menuOrdenar() {
 ```
 
 **NOTA**: En este menú, añadí una tercera opción para listar los elementos y hacer comprobaciones.
+
+
+
+
+
+## 6. Documentar con JavaDoc
+
+Dentro de este mismo repositorio se ha añadido un directorio llamado 'Documentation' con toda la documentación generada de JavaDoc desde el propio IDE.
+
+![](images/javadoc.png)
+
+
+
+**JavaDoc** es una utilidad de Oracle para la generación de documentación de APIs en formato HTML a partir de código fuente Java. Es el estándar de la industria para documentar clases de Java. Para hacer uso de esta utilidad es necesario crear un tipo especial de comentario, que empieza con '/** ' y termina con ' */', al principio de cada una de las clases y de las funciones que hemos programado. También podemos utilizar este tipo de comentarios en los constructores de cada clase y en los paquetes (package).
+
+Estos comentarios, permiten el uso de etiquetas especiales (tags) que siempre empiezan con el símbolo '@' y que nos permiten describir cada uno de los componentes que forman parte de una función:
+
+Los tags más utilizados son los siguientes:
+
+![](images/tags.png)
+
+Ver más información en: https://docs.oracle.com/javase/8/docs/technotes/guides/javadoc/index.html
