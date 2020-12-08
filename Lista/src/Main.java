@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -27,16 +28,16 @@ public class Main {
 
 
         // PRUEBAS
-        listaAlumnos[0] = "Schwarzenegger";
-        listaAlumnos[1] = "Norris";
-        listaAlumnos[2] = "Stallone";
-        listaAlumnos[3] = "Lundgren";
-        listaAlumnos[4] = "Statham";
-        listaAlumnos[5] = "Rourke";
-        listaAlumnos[6] = "Willis";
-        listaAlumnos[7] = "Van Damme";
-        listaAlumnos[8] = "Crews";
-        listaAlumnos[9] = "Masana";
+        listaAlumnos[0] = "schwarzenegger";
+        listaAlumnos[1] = "norris";
+        listaAlumnos[2] = "stallone";
+        listaAlumnos[3] = "lundgren";
+        listaAlumnos[4] = "statham";
+        listaAlumnos[5] = "rourke";
+        listaAlumnos[6] = "willis";
+        listaAlumnos[7] = "van damme";
+        listaAlumnos[8] = "crews";
+        listaAlumnos[9] = "masana";
         contadorElementos = 10;
 
 
@@ -112,7 +113,7 @@ public class Main {
      *
      * @param lista             array de Strings
      * @param contadorElementos entero que permite contabilizar el nº de elementos introducidos en el array
-     * @param longitudArray entero que almacena la longitud máxima del array listaAlumnos
+     * @param longitudArray     entero que almacena la longitud máxima del array listaAlumnos
      * @return devuelve el valor actualizado de contadorElementos
      */
     public static int insertar(String[] lista, int contadorElementos, int longitudArray) {
@@ -198,8 +199,7 @@ public class Main {
          */
         if (listaVacia(contadorElementos)) {
             printText("Error: No se puede buscar ningún elemento. La lista está vacía. \n");
-        }
-        else {
+        } else {
             elemento = enterString("Introduce un apellido para buscar");
 
             /*
@@ -242,8 +242,7 @@ public class Main {
          */
         if (listaVacia(contadorElementos)) {
             printText("Error: No se puede buscar ningún elemento. La lista está vacía. \n");
-        }
-        else {
+        } else {
             posicion = enterInt("Introduce una posición para buscar");
             elemento = lista[posicion];
 
@@ -274,8 +273,7 @@ public class Main {
          */
         if (listaVacia(contadorElementos)) {
             printText("Error: No se puede suprimir ningún valor. La lista está vacía. \n");
-        }
-        else {
+        } else {
             posicion = enterInt("Introduce una posición a eliminar");
 
             /*
@@ -391,8 +389,7 @@ public class Main {
     public static int anular(int contadorElementos) {
         if (listaVacia(contadorElementos)) {
             printText("Error: La lista ya se encuentra vacía. \n");
-        }
-        else {
+        } else {
             /*
             Para vaciar el array, simplemente cambiamos el valor del contador a 0
              */
@@ -454,14 +451,13 @@ public class Main {
     /**
      * Imprime todos los elementos de la lista de alumnos con su correspondiente posición
      *
-     * @param lista array de Strings con los apellidos de los alumnos
+     * @param lista             array de Strings con los apellidos de los alumnos
      * @param contadorElementos entero que permite contabilizar el nº de apellidos que se encuentran dentro del array
      */
     public static void imprimir(String[] lista, int contadorElementos) {
         if (listaVacia(contadorElementos)) {
             printText("Error: No se puede imprimir ningún valor. La lista de apellidos está vacía. \n");
-        }
-        else {
+        } else {
             for (int i = 0; i < contadorElementos; i++) {
                 printText(i + ". " + lista[i]);
             }
@@ -494,8 +490,7 @@ public class Main {
 
         if (listaVacia(contadorElementos)) {
             printText("Error: No se puede ordenar una lista sin elementos. \n");
-        }
-        else {
+        } else {
             /*
             Asignamos a 'i' el valor de 0 para que empiece a recorrer el array desde el primer valor, mientras el valor
             de 'i' sea menor que el nº de elementos dentro del array se ejecutará el bucle, de esta manera podremos
@@ -577,6 +572,7 @@ public class Main {
     /**
      * Localiza la primera posición en la que se encuentra un determinado elemento introducido por el usuario
      * en una lista ordenada
+     *
      * @param lista             array de Strings con la lista de apellidos
      * @param contadorElementos entero que permite contabilizar el nº de elementos introducidos en el array
      * @return devuelve un número, si es negativo el elemento no se encuentra en la lista, en cualquier otro caso
@@ -588,32 +584,42 @@ public class Main {
         String elemento;
         elemento = enterString("Introduce un apellido para buscar");
 
-            while (izquierda <= derecha) {
-                int mitad = izquierda + (derecha - izquierda) / 2;
+        /*
+        Al utilizar el metodo compareTo entre un string y otro da como resultado un nº entero
+        Si el resultado es mayor que 0: el primer string es mayor que el segundo
+        Si el resultado es 0: ambas cadenas son iguales
+        Si el resultado es menor que 0: el primer string es menor que el segundo
+         */
+        while (izquierda <= derecha) {
+            int mitad = izquierda + (derecha - izquierda) / 2;
 
                 /*
                 Compara un elemento con el que se encuentra en la posición indicada
                  */
-                int resultado = elemento.compareTo(lista[mitad]);
+            int resultado = elemento.compareTo(lista[mitad]);
 
                 /*
                 Comprobamos si el elemento se encuentra en el medio
                  */
-                if (resultado == 0)
-                    return mitad;
-
-                /*
-                Si el elemento es mayor que 0, ignoramos la mitad izquierda
-                 */
-                else if (resultado > 0)
-                    izquierda = mitad + 1;
-
-                /*
-                Si el elemento es menor que 0, ignoramos la mitad derecha
-                 */
-                else
-                    derecha = mitad - 1;
+            if (resultado == 0) {
+                return mitad;
             }
+
+                /*
+                Si el resultado es mayor que 0, ignoramos la mitad izquierda
+                ya que el elemento es mayor que el resto de los primeros valores
+                 */
+            else if (resultado > 0) {
+                izquierda = mitad + 1;
+            }
+                /*
+                Si el resultado es menor que 0, ignoramos la mitad derecha
+                ya que el elemento es menor que el resto de valores
+                 */
+            else {
+                derecha = mitad - 1;
+            }
+        }
         return -1;
     }
 
@@ -624,7 +630,7 @@ public class Main {
      * @param posicion entero que almacena la posición de un determinado elemento
      * @return devuelve mensaje de error si la posición es incorrecta o mensaje de éxito si es correcta
      */
-    public static String mensajePosicion (int posicion) {
+    public static String mensajePosicion(int posicion) {
         String mensaje;
 
         if (posicion < 0) {
@@ -638,13 +644,14 @@ public class Main {
 
     /**
      * Permite añadir un elemento dentro de la lista de alumnos
-     * @param lista array con la lista de alumnos
-     * @param elemento string que almacena el apellido de un alumno
-     * @param posicion entero que indica la ubicación de un elemento dentro de la lista
+     *
+     * @param lista             array con la lista de alumnos
+     * @param elemento          string que almacena el apellido de un alumno
+     * @param posicion          entero que indica la ubicación de un elemento dentro de la lista
      * @param contadorElementos entero que contabiliza el número de elementos que contiene la lista
      * @return devuelve el valor actualizado de contadorElementos
      */
-    public static int addElemento(String [] lista, String elemento, int posicion, int contadorElementos) {
+    public static int addElemento(String[] lista, String elemento, int posicion, int contadorElementos) {
         /*
         Añadimos elemento al array en la posición indicada
          */
@@ -726,7 +733,7 @@ public class Main {
         printText(mensaje);
 
         do {
-            texto = consola.nextLine();
+            texto = consola.nextLine().toLowerCase(); // Lo pasamos a minúsculas
         } while (texto.isEmpty());
 
         return texto;
@@ -755,8 +762,9 @@ public class Main {
 
     /**
      * Permite conocer si un elemento existe dentro de la lista
-     * @param lista array con la lista de apellidos de los alumnos
-     * @param busqueda elemento para realizar la busqueda
+     *
+     * @param lista             array con la lista de apellidos de los alumnos
+     * @param busqueda          elemento para realizar la busqueda
      * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
      * @return devuelve un valor boolean, si el elemento existe devuelve TRUE, si no existe devuelve FALSE
      */
@@ -776,7 +784,7 @@ public class Main {
     /**
      * Permite conocer si una posición existe dentro de la lista
      *
-     * @param posicion elemento para realizar la busqueda
+     * @param posicion          elemento para realizar la busqueda
      * @param contadorElementos entero que contabiliza el nº de elementos que contiene el array
      * @return devuelve un valor boolean, si el elemento existe devuelve TRUE, si no existe devuelve FALSE
      */
